@@ -1,0 +1,220 @@
+[
+  {
+    "claim_id": "CLM-2024-MUC-001",
+    "raw_text": "Policyholder: Anna Müller\n        Policy number: HAV-MUC-88432\n        Date of incident: 10 June 2024\n\n        Dear Claims Team,\n\n        I am writing to report a water damage incident at my apartment located at\n        Schillerstraße 14, 80336 Munich. On the evening of 10 June, a pipe behind\n        the bathroom wall burst without warning. By the time we discovered the leak\n        the water had spread throughout the hallway and into the living room.\n\n        The parquet flooring in the hallway (approx. 18 m²) has warped beyond repair\n        and the drywall along one living room wall is soaked and will need full\n        replacement. A plumber arrived the next morning and confirmed the pipe had\n        corroded through — he provided a preliminary report.\n\n        I estimate the total repair cost at around €8,500 based on quotes I am still\n        gathering. Please let me know which documents you require.\n\n        Kind regards,\n        Anna Müller",
+    "extracted": {
+      "policyholder_name": "Anna Müller",
+      "policy_number": "HAV-MUC-88432",
+      "incident_date": "2024-06-10",
+      "incident_type": "burst pipe / water damage",
+      "damage_description": "Pipe burst behind the bathroom wall; parquet flooring in the hallway (~18 m²) warped beyond repair; living room drywall soaked and requires full replacement. Plumber confirmed the pipe had corroded through.",
+      "claimed_amount_eur": 8500.0,
+      "incident_location": "Schillerstraße 14, 80336 Munich",
+      "third_parties_involved": false
+    },
+    "classification": {
+      "peril_category": "water_damage",
+      "severity": "medium",
+      "auto_processable": false,
+      "flags": []
+    },
+    "completeness": {
+      "missing_fields": [
+        "repair_estimate"
+      ],
+      "required_documents": [
+        "repair_estimate",
+        "damage_photos",
+        "plumber_report"
+      ],
+      "completeness_score": 0.75,
+      "information_sufficient_for_triage": true
+    },
+    "decision": {
+      "decision": "manual_review",
+      "rationale": "Medium-severity water damage with a plumber's preliminary report already on file; a formal repair estimate is still required before settlement can be authorised.",
+      "priority": "standard",
+      "estimated_processing_days": 7,
+      "next_action": "Request formal repair estimate and damage photos; assign to water damage specialist."
+    },
+    "processing_time_ms": 0,
+    "model": "claude-sonnet-4-6",
+    "error": null
+  },
+  {
+    "claim_id": "CLM-2024-BER-002",
+    "raw_text": "Claimant: Thomas Berger\n        Address: Prenzlauer Allee 77, 10405 Berlin\n        Policy: HHV-BER-29107\n\n        Incident: Residential burglary\n        Date: 14 July 2024, overnight (estimated between 23:00 and 06:00)\n\n        Our apartment was broken into while we were away for the weekend.\n        The perpetrators forced the balcony door (2nd floor). Items stolen include:\n        MacBook Pro (approx. €2,200), camera equipment (Canon EOS R5, two lenses, ~€5,000),\n        jewellery (estimated €3,000), and €400 cash.\n\n        A police report has been filed at Polizeidienststelle Prenzlauer Berg,\n        reference number: PD-BER-2024-078234. A copy is attached.\n\n        Total claimed: approximately €10,600.\n\n        Thomas Berger",
+    "extracted": {
+      "policyholder_name": "Thomas Berger",
+      "policy_number": "HHV-BER-29107",
+      "incident_date": "2024-07-14",
+      "incident_type": "burglary / theft",
+      "damage_description": "Balcony door forced on the 2nd floor overnight. MacBook Pro, Canon EOS R5 with two lenses, jewellery, and cash stolen.",
+      "claimed_amount_eur": 10600.0,
+      "incident_location": "Prenzlauer Allee 77, 10405 Berlin",
+      "third_parties_involved": true
+    },
+    "classification": {
+      "peril_category": "theft_burglary",
+      "severity": "high",
+      "auto_processable": false,
+      "flags": [
+        "high_value_items"
+      ]
+    },
+    "completeness": {
+      "missing_fields": [
+        "itemised_receipts_or_valuations"
+      ],
+      "required_documents": [
+        "police_report_copy",
+        "itemised_receipts_or_valuations",
+        "proof_of_ownership"
+      ],
+      "completeness_score": 0.8,
+      "information_sufficient_for_triage": true
+    },
+    "decision": {
+      "decision": "manual_review",
+      "rationale": "High-value burglary claim with a police report already filed; itemised proof of ownership is needed to substantiate the claimed amount before settlement.",
+      "priority": "urgent",
+      "estimated_processing_days": 5,
+      "next_action": "Request itemised receipts/valuations for stolen items; assign to theft claims specialist."
+    },
+    "processing_time_ms": 0,
+    "model": "claude-sonnet-4-6",
+    "error": null
+  },
+  {
+    "claim_id": "CLM-2024-STU-003",
+    "raw_text": "Good afternoon,\n\n        I'd like to claim for hail damage to my car. There was a severe hailstorm\n        here in Stuttgart last Thursday. My car, a 2021 VW Golf (licence plate\n        S-KB-4421), was parked outside on Königstraße and has multiple dents across\n        the bonnet, roof and boot lid. The windscreen also has a crack.\n\n        I have photos. Don't know the repair cost yet — haven't been to a garage.\n\n        Best,\n        Klaus Brandt",
+    "extracted": {
+      "policyholder_name": "Klaus Brandt",
+      "policy_number": null,
+      "incident_date": null,
+      "incident_type": "hail damage / vehicle",
+      "damage_description": "Multiple dents across bonnet, roof and boot lid; cracked windscreen. Vehicle was parked outside during a severe hailstorm.",
+      "claimed_amount_eur": null,
+      "incident_location": "Königstraße, Stuttgart",
+      "third_parties_involved": false
+    },
+    "classification": {
+      "peril_category": "vehicle",
+      "severity": "medium",
+      "auto_processable": false,
+      "flags": []
+    },
+    "completeness": {
+      "missing_fields": [
+        "policy_number",
+        "incident_date",
+        "repair_estimate"
+      ],
+      "required_documents": [
+        "repair_estimate",
+        "damage_photos",
+        "vehicle_registration"
+      ],
+      "completeness_score": 0.45,
+      "information_sufficient_for_triage": false
+    },
+    "decision": {
+      "decision": "request_information",
+      "rationale": "Plausible hail-damage claim, but policy number, exact incident date, and a repair estimate are all missing — triage cannot proceed without them.",
+      "priority": "standard",
+      "estimated_processing_days": 10,
+      "next_action": "Request policy number, confirmed incident date, and a garage repair estimate from the policyholder."
+    },
+    "processing_time_ms": 0,
+    "model": "claude-sonnet-4-6",
+    "error": null
+  },
+  {
+    "claim_id": "CLM-2024-HAM-004",
+    "raw_text": "URGENT — Fire damage to kitchen\n\n        Name: Fatima Al-Hassan\n        Address: Elbchaussee 200, 22605 Hamburg\n        Policy number: GHV-HAM-51903\n\n        On 2 August 2024 at approximately 13:15, a fire started in the kitchen of\n        our house. The cause appears to be an electrical fault in the built-in oven.\n        The fire spread to the kitchen cupboards and part of the ceiling before the\n        fire brigade arrived and extinguished it.\n\n        The kitchen is a complete write-off. Smoke damage has also affected the\n        adjacent dining room and hallway. Structural assessment has not yet been\n        carried out — the fire brigade has flagged a possible load-bearing wall\n        concern and advised us not to use the kitchen or dining room.\n\n        Fire brigade report reference: FW-HH-2024-0802-0047.\n\n        We are currently staying with relatives. Total loss estimate is unknown\n        pending structural survey. Please escalate as a priority claim.\n\n        Fatima Al-Hassan\n        +49 151 3344 5566",
+    "extracted": {
+      "policyholder_name": "Fatima Al-Hassan",
+      "policy_number": "GHV-HAM-51903",
+      "incident_date": "2024-08-02",
+      "incident_type": "kitchen fire",
+      "damage_description": "Electrical fault in the built-in oven caused a fire that spread to the kitchen cupboards and ceiling; possible load-bearing wall concern flagged by the fire brigade; smoke damage to the dining room and hallway. Kitchen is a complete write-off.",
+      "claimed_amount_eur": null,
+      "incident_location": "Elbchaussee 200, 22605 Hamburg",
+      "third_parties_involved": false
+    },
+    "classification": {
+      "peril_category": "fire",
+      "severity": "extreme",
+      "auto_processable": false,
+      "flags": [
+        "structural_damage"
+      ]
+    },
+    "completeness": {
+      "missing_fields": [
+        "repair_estimate",
+        "structural_survey"
+      ],
+      "required_documents": [
+        "fire_brigade_report",
+        "structural_survey",
+        "repair_estimate",
+        "damage_photos"
+      ],
+      "completeness_score": 0.65,
+      "information_sufficient_for_triage": true
+    },
+    "decision": {
+      "decision": "manual_review",
+      "rationale": "Extreme-severity fire with a flagged structural concern and a displaced policyholder — requires urgent senior handler review and a structural survey before any settlement figure can be assessed.",
+      "priority": "urgent",
+      "estimated_processing_days": 14,
+      "next_action": "Escalate to senior claims handler; commission structural survey; arrange interim accommodation support."
+    },
+    "processing_time_ms": 0,
+    "model": "claude-sonnet-4-6",
+    "error": null
+  },
+  {
+    "claim_id": "CLM-2024-FFM-005",
+    "raw_text": "Wind / storm damage — roof tiles and garden shed\n        Date of loss: 19 October 2024\n\n        The storm last Friday (Sturmtief \"Axel\") caused significant damage to our\n        property in Frankfurt. Approximately 30 roof tiles were displaced or broken\n        on the west-facing slope of our detached house; two of them fell into the\n        garden but fortunately nobody was injured. We put a tarpaulin over the\n        exposed section but rain has already penetrated into the attic space.\n\n        The garden shed (approx. 4 × 3 m) was completely destroyed — the roof\n        came off and the walls collapsed. Contents inside (lawnmower, tools) are\n        damaged.\n\n        I don't yet have a repair estimate for the roof. I'd like to claim for:\n        — Roof repair (tiling + underlay): estimated €4,000–5,500\n        — Shed replacement: ~€1,800\n        — Lawnmower and tools: ~€600\n\n        Policy: GHV-FFM-30041\n        Name: Peter Hoffmann\n        Location: Am Sachsenhäuser Berg 12, 60594 Frankfurt am Main",
+    "extracted": {
+      "policyholder_name": "Peter Hoffmann",
+      "policy_number": "GHV-FFM-30041",
+      "incident_date": "2024-10-19",
+      "incident_type": "storm damage / roof and garden shed",
+      "damage_description": "Storm 'Axel' displaced ~30 roof tiles on the west-facing slope; rain has penetrated the attic space. Garden shed (approx. 4×3 m) completely destroyed — roof and walls collapsed, damaging lawnmower and tools stored inside.",
+      "claimed_amount_eur": 7150.0,
+      "incident_location": "Am Sachsenhäuser Berg 12, 60594 Frankfurt am Main",
+      "third_parties_involved": false
+    },
+    "classification": {
+      "peril_category": "natural_hazard",
+      "severity": "high",
+      "auto_processable": false,
+      "flags": []
+    },
+    "completeness": {
+      "missing_fields": [
+        "roof_repair_estimate"
+      ],
+      "required_documents": [
+        "repair_estimate",
+        "damage_photos",
+        "weather_service_confirmation"
+      ],
+      "completeness_score": 0.7,
+      "information_sufficient_for_triage": true
+    },
+    "decision": {
+      "decision": "manual_review",
+      "rationale": "High-severity storm damage across two structures; final roof repair estimate is still pending, but sufficient detail exists to begin triage, and interim tarpaulin mitigation is already in place.",
+      "priority": "standard",
+      "estimated_processing_days": 9,
+      "next_action": "Request final roof repair estimate; confirm storm event via regional weather service record; assign to natural hazard team."
+    },
+    "processing_time_ms": 0,
+    "model": "claude-sonnet-4-6",
+    "error": null
+  }
+]

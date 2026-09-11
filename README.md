@@ -1,5 +1,8 @@
 # claude-claims-triage
 
+**Sample dashboard output:** https://sarosh008.github.io/claude-claims-triage/sample-output/
+*(generated in mock mode from the 5 sample claims — see [Quickstart](#quickstart) to run it yourself, with or without a live API key)*
+
 **Agentic insurance claims triage pipeline built on the Anthropic Claude API.**
 
 Processes unstructured claim submissions through a four-stage Claude-powered pipeline — extracting fields, classifying perils, assessing completeness, and routing each claim to the correct handling workflow. Outputs structured JSON, CSV, and an interactive HTML dashboard.

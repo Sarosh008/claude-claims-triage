@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claims Triage Report — claude-claims-triage</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body   { font-family: Arial, Helvetica, sans-serif; background: #f4f4f4;
+             color: #1a1a1a; padding: 2rem; }
+  header { margin-bottom: 1.5rem; }
+  header h1 { font-size: 1.5rem; font-weight: 700; color: #1a1a1a; }
+  header p  { font-size: 0.85rem; color: #666; margin-top: 0.25rem; }
+  .accent { color: #D97757; }
+
+  /* Stat cards */
+  .stats  { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .stat   { background: #fff; border: 1px solid #ddd; border-radius: 6px;
+             padding: 0.75rem 1.25rem; min-width: 130px; }
+  .stat .val { font-size: 1.7rem; font-weight: 700; color: #D97757; }
+  .stat .lbl { font-size: 0.75rem; color: #888; margin-top: 0.15rem; }
+
+  /* Table */
+  .table-wrap { overflow-x: auto; background: #fff; border-radius: 6px;
+                 border: 1px solid #ddd; }
+  table  { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  th     { background: #1a1a1a; color: #fff; padding: 0.55rem 0.75rem;
+             text-align: left; white-space: nowrap; }
+  td     { padding: 0.5rem 0.75rem; border-bottom: 1px solid #eee;
+             vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td  { background: #fafafa; }
+
+  .badge { display: inline-block; border-radius: 3px; padding: 0.1rem 0.4rem;
+             font-size: 0.75rem; font-weight: 600; color: #fff; }
+
+  .meta  { font-size: 0.75rem; color: #888; }
+  footer { margin-top: 1.5rem; font-size: 0.75rem; color: #aaa; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Claims Triage Report <span class="accent">·</span> claude-claims-triage</h1>
+  <p>Powered by <strong>Anthropic Claude API</strong> (claude-sonnet-4-6) ·
+     github.com/Sarosh008/claude-claims-triage</p>
+</header>
+
+<div class="stats">
+  <div class="stat">
+    <div class="val">5</div>
+    <div class="lbl">Claims processed</div>
+  </div>
+  <div class="stat">
+    <div class="val" style="color:#4CAF50">0</div>
+    <div class="lbl">Auto-approved</div>
+  </div>
+  <div class="stat">
+    <div class="val" style="color:#FF9800">4</div>
+    <div class="lbl">Manual review</div>
+  </div>
+  <div class="stat">
+    <div class="val" style="color:#2196F3">1</div>
+    <div class="lbl">Info requested</div>
+  </div>
+  <div class="stat">
+    <div class="val" style="color:#D32F2F">0</div>
+    <div class="lbl">Rejected</div>
+  </div>
+  <div class="stat">
+    <div class="val">67%</div>
+    <div class="lbl">Avg completeness</div>
+  </div>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+  <th>Claim ID</th>
+  <th>Policyholder</th>
+  <th>Incident</th>
+  <th>Peril</th>
+  <th>Severity</th>
+  <th>Decision</th>
+  <th>Priority</th>
+  <th>ETA</th>
+  <th>Completeness</th>
+  <th>Rationale</th>
+  <th>Flags / Missing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>CLM-2024-MUC-001</strong></td>
+  <td>Anna Müller</td>
+  <td>burst pipe / water damage</td>
+  <td>water damage</td>
+  <td><span class="badge" style="background:#FF9800">MEDIUM</span></td>
+  <td><span class="badge" style="background:#FF9800">MANUAL REVIEW</span></td>
+  <td>standard</td>
+  <td>7d</td>
+  <td>75%</td>
+  <td style="max-width:260px">Medium-severity water damage with a plumber's preliminary report already on file; a formal repair estimate is still required before settlement can be authorised.</td>
+  <td class="meta">⚑ —<br>📋 repair_estimate</td>
+</tr>
+<tr>
+  <td><strong>CLM-2024-BER-002</strong></td>
+  <td>Thomas Berger</td>
+  <td>burglary / theft</td>
+  <td>theft burglary</td>
+  <td><span class="badge" style="background:#F44336">HIGH</span></td>
+  <td><span class="badge" style="background:#FF9800">MANUAL REVIEW</span></td>
+  <td>urgent</td>
+  <td>5d</td>
+  <td>80%</td>
+  <td style="max-width:260px">High-value burglary claim with a police report already filed; itemised proof of ownership is needed to substantiate the claimed amount before settlement.</td>
+  <td class="meta">⚑ high_value_items<br>📋 itemised_receipts_or_valuations</td>
+</tr>
+<tr>
+  <td><strong>CLM-2024-STU-003</strong></td>
+  <td>Klaus Brandt</td>
+  <td>hail damage / vehicle</td>
+  <td>vehicle</td>
+  <td><span class="badge" style="background:#FF9800">MEDIUM</span></td>
+  <td><span class="badge" style="background:#2196F3">REQUEST INFORMATION</span></td>
+  <td>standard</td>
+  <td>10d</td>
+  <td>45%</td>
+  <td style="max-width:260px">Plausible hail-damage claim, but policy number, exact incident date, and a repair estimate are all missing — triage cannot proceed without them.</td>
+  <td class="meta">⚑ —<br>📋 policy_number, incident_date, repair_estimate</td>
+</tr>
+<tr>
+  <td><strong>CLM-2024-HAM-004</strong></td>
+  <td>Fatima Al-Hassan</td>
+  <td>kitchen fire</td>
+  <td>fire</td>
+  <td><span class="badge" style="background:#880E4F">EXTREME</span></td>
+  <td><span class="badge" style="background:#FF9800">MANUAL REVIEW</span></td>
+  <td>urgent</td>
+  <td>14d</td>
+  <td>65%</td>
+  <td style="max-width:260px">Extreme-severity fire with a flagged structural concern and a displaced policyholder — requires urgent senior handler review and a structural survey before any settlement figure can be assessed.</td>
+  <td class="meta">⚑ structural_damage<br>📋 repair_estimate, structural_survey</td>
+</tr>
+<tr>
+  <td><strong>CLM-2024-FFM-005</strong></td>
+  <td>Peter Hoffmann</td>
+  <td>storm damage / roof and garden shed</td>
+  <td>natural hazard</td>
+  <td><span class="badge" style="background:#F44336">HIGH</span></td>
+  <td><span class="badge" style="background:#FF9800">MANUAL REVIEW</span></td>
+  <td>standard</td>
+  <td>9d</td>
+  <td>70%</td>
+  <td style="max-width:260px">High-severity storm damage across two structures; final roof repair estimate is still pending, but sufficient detail exists to begin triage, and interim tarpaulin mitigation is already in place.</td>
+  <td class="meta">⚑ —<br>📋 roof_repair_estimate</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<footer>
+  Generated by claude-claims-triage v0.1.0 ·
+  Total claims: 5 ·
+  Model: claude-sonnet-4-6
+</footer>
+</body>
+</html>

@@ -1,0 +1,6 @@
+claim_id,policyholder,incident_type,peril_category,severity,auto_processable,completeness_score,decision,priority,estimated_processing_days,claimed_amount_eur,flags,missing_fields,processing_time_ms,error
+CLM-2024-MUC-001,Anna Müller,burst pipe / water damage,water_damage,medium,False,0.75,manual_review,standard,7,8500.0,,repair_estimate,0,
+CLM-2024-BER-002,Thomas Berger,burglary / theft,theft_burglary,high,False,0.8,manual_review,urgent,5,10600.0,high_value_items,itemised_receipts_or_valuations,0,
+CLM-2024-STU-003,Klaus Brandt,hail damage / vehicle,vehicle,medium,False,0.45,request_information,standard,10,,,policy_number|incident_date|repair_estimate,0,
+CLM-2024-HAM-004,Fatima Al-Hassan,kitchen fire,fire,extreme,False,0.65,manual_review,urgent,14,,structural_damage,repair_estimate|structural_survey,0,
+CLM-2024-FFM-005,Peter Hoffmann,storm damage / roof and garden shed,natural_hazard,high,False,0.7,manual_review,standard,9,7150.0,,roof_repair_estimate,0,
