@@ -142,10 +142,20 @@ class _MockMessage:
 
 
 class _MockMessages:
-    """Mock messages.create that returns pre-defined tool inputs."""
+    """
+    Mock messages.create that returns pre-defined tool inputs.
 
-    def __init__(self, responses: dict[str, dict]):
+    Optionally accepts a ``scenario_matcher(prompt_text) -> dict | None`` that
+    inspects the outgoing prompt (which contains the claim text / prior-stage
+    JSON) and returns a claim-specific set of per-tool responses, so different
+    claims can yield genuinely different mock output. Falls back to the flat
+    ``responses`` dict when no matcher is set or no scenario matches — this
+    keeps default (matcher=None) behaviour, and every existing test, unchanged.
+    """
+
+    def __init__(self, responses: dict[str, dict], scenario_matcher=None):
         self._responses = responses
+        self._scenario_matcher = scenario_matcher
 
     def create(
         self,
@@ -158,15 +168,21 @@ class _MockMessages:
         **kwargs,
     ) -> _MockMessage:
         tool_name = tool_choice["name"]
-        response_input = self._responses.get(tool_name, {})
+        responses = self._responses
+        if self._scenario_matcher is not None and messages:
+            prompt_text = messages[0].get("content", "")
+            matched = self._scenario_matcher(prompt_text)
+            if matched is not None:
+                responses = matched
+        response_input = responses.get(tool_name, self._responses.get(tool_name, {}))
         return _MockMessage(tool_name, response_input)
 
 
 class _MockClient:
     """Minimal mock Anthropic client with a .messages.create interface."""
 
-    def __init__(self, responses: dict[str, dict] | None = None):
-        self.messages = _MockMessages(responses or _DEFAULT_MOCK_RESPONSES)
+    def __init__(self, responses: dict[str, dict] | None = None, scenario_matcher=None):
+        self.messages = _MockMessages(responses or _DEFAULT_MOCK_RESPONSES, scenario_matcher)
 
 
 # ── Agent ─────────────────────────────────────────────────────────────────────
@@ -185,6 +201,12 @@ class ClaimsTriageAgent:
     mock : bool
         If True, uses a mock client that returns pre-defined responses without
         calling the Anthropic API. Useful for CI, testing, and demos.
+    mock_scenarios : dict, optional
+        Only used when ``mock=True``. Maps a distinguishing substring (matched
+        against the outgoing prompt text) to a per-tool response dict, so
+        different claims yield different mock output instead of one fixed
+        response for every claim. Claims that match no key fall back to the
+        default mock response. See ``demo/mock_scenarios.py``.
 
     Examples
     --------
@@ -201,12 +223,20 @@ class ClaimsTriageAgent:
         api_key: str | None = None,
         model: str | None = None,
         mock: bool = False,
+        mock_scenarios: dict[str, dict[str, dict]] | None = None,
     ):
         self.model = model or self.DEFAULT_MODEL
         self._mock = mock or os.environ.get("ANTHROPIC_API_KEY") == "mock"
 
         if self._mock:
-            self._client = _MockClient()
+            matcher = None
+            if mock_scenarios:
+                def matcher(prompt_text: str, _scenarios=mock_scenarios) -> dict | None:
+                    for key_substring, responses in _scenarios.items():
+                        if key_substring in prompt_text:
+                            return responses
+                    return None
+            self._client = _MockClient(scenario_matcher=matcher)
         else:
             try:
                 import anthropic  # type: ignore[import]

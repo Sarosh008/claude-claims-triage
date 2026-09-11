@@ -28,6 +28,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from claims_triage import ClaimsTriageAgent
 from claims_triage.reporter import to_json, to_csv, to_html
 from demo.sample_claims import SAMPLE_CLAIMS
+from demo.mock_scenarios import MOCK_SCENARIOS
 
 
 BANNER = """
@@ -63,12 +64,16 @@ def main():
     # ── Initialise agent ──────────────────────────────────────────────────────
     use_mock = args.mock or os.environ.get("ANTHROPIC_API_KEY") == "mock"
     if use_mock:
-        print("  Mode : MOCK (pre-defined responses, no API calls)")
+        print("  Mode : MOCK (hand-written per-claim responses, no API calls)")
     else:
         print(f"  Mode : LIVE — model: {args.model or ClaimsTriageAgent.DEFAULT_MODEL}")
     print(f"  Claims: {len(SAMPLE_CLAIMS)}\n")
 
-    agent = ClaimsTriageAgent(model=args.model, mock=use_mock)
+    agent = ClaimsTriageAgent(
+        model=args.model,
+        mock=use_mock,
+        mock_scenarios=MOCK_SCENARIOS if use_mock else None,
+    )
 
     # ── Process each claim ────────────────────────────────────────────────────
     results = []
